@@ -1,0 +1,42 @@
+<html>
+
+<head>
+  <title>Kodexa Example</title>
+</head>
+
+<body>
+  <div style='margin:20px'>
+    <h5>Tagged HTML Example</h5>
+    <div id="app">
+
+      <div v-if='kodexaDocument'>
+        <kodexa-document :kdocument="kodexaDocument" :options='{showTags:true, splitter:20}'></kodexa-document>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="//unpkg.com/kodexa-vue@2.0.52/kodexa.umd.min.js"></script>
+
+  <script type="module">
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        kodexaDocument: null
+      },
+      components: {
+        'kodexa-document': window.kodexa.KodexaDocument
+      },
+      mounted() {
+
+        // Note you can do fromJson or fromKdxa
+        window.kodexa.KdxaDocument.fromUrl("news.kdxa").then(doc => {
+          this.kodexaDocument = doc;
+        })
+      }
+    })
+
+  </script>
+</body>
+
+</html>
